@@ -162,6 +162,186 @@
     const tg = window.Telegram?.WebApp;
     if (tg) { tg.expand(); }
 
+    // ====== LAKKOOFSOTA QABAMAN AS KEESSATTI GALCHI ======
+    let lakkoofsotaQabaman = [8, 9]; 
+    // ===================================================
+
+    const grid = document.getElementById('number-grid');
+    const usernameInput = document.getElementById('username');
+    const modal = document.getElementById('successModal');
+    const modalDetails = document.getElementById('modalDetails');
+
+    function renderGrid() {
+        grid.innerHTML = '';
+        for (let i = 1; i <= 50; i++) {
+            const btn = document.createElement('button');
+            btn.innerText = i;
+            btn.className = 'number-btn';
+            
+            if (lakkoofsotaQabaman.includes(i)) {
+                btn.classList.add('taken');
+                btn.disabled = true;
+            } else {
+                btn.classList.add('available');
+                btn.onclick = function() {
+                    const maqaa = usernameInput.value.trim();
+                    if (!maqaa) {
+                        alert("Maaloo jalqaba maqaa keessan guutaa!");
+                        return;
+                    }
+                    
+                    modalDetails.innerHTML = `
+                        👤 <strong>Maqaa:</strong> ${maqaa}<br>
+                        🔢 <strong>Lakkoofsa:</strong> ${i}<br>
+                        💰 <strong>Gatii:</strong> 250 ETB<br>
+                        🏦 <strong>Bankii (CBE):</strong> 1000316753497<br><br>
+                        <span style="color: #ffd700;">⚠️ Maaloo nagahee kafaltii keessanii bot irratti nuuf ergaa!</span>
+                    `;
+                    modal.style.display = 'flex';
+                };
+            }
+            grid.appendChild(btn);
+        }
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+        if (tg) { tg.close(); }
+    }
+
+    renderGrid();
+</script>
+
+</body>
+</html>
+        .price-tag {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-size: 14px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #444;
+            border-radius: 8px;
+            background: #333;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+        }
+        input[type="text"]:focus {
+            border-color: #ffd700;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        button.number-btn {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button.available {
+            background-color: #2ecc71;
+            color: white;
+        }
+        button.taken {
+            background-color: #e74c3c;
+            color: white;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .modal-content {
+            background: #2d2d2d;
+            padding: 24px;
+            border-radius: 16px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid #ffd700;
+        }
+        .modal-content h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+        .modal-details {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-size: 15px;
+            line-height: 1.6;
+            border-left: 4px solid #2ecc71;
+        }
+        .close-btn {
+            background: #ffd700;
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 24px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎰 Lotoorii Martha Gebre</h1>
+    <div class="price-tag">Gatii Tikkee: 250 ETB</div>
+
+    <div class="input-group">
+        <label for="username">Maqaa Keessan Guutaa:</label>
+        <input type="text" id="username" placeholder="Fakkeenya: Dereje...">
+    </div>
+
+    <div class="grid" id="number-grid"></div>
+</div>
+
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <h3>🎉 Tikkeen Keessan Qophaayeera!</h3>
+        <div class="modal-details" id="modalDetails"></div>
+        <button class="close-btn" onclick="closeModal()">Toole, Deebi'i</button>
+    </div>
+</div>
+
+<script>
+    const tg = window.Telegram?.WebApp;
+    if (tg) { tg.expand(); }
+
     let lakkoofsotaQabaman = []; 
 
     const grid = document.getElementById('number-grid');
